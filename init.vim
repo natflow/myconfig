@@ -15,20 +15,21 @@ call plug#begin('~/.config/nvim/plugged')
         map <leader>t :CtrlP<cr>
         map <leader>b :CtrlPBuffer<cr>
         map <leader>f :CtrlPClearAllCaches<cr>
-        let g:ctrlp_working_path_mode = 'wra'
-            " 'w' - modifier to "r": start search from the cwd instead of the current file's directory       map <leader>t :CtrlP<cr>
-            " 'r' - the nearest ancestor of the current file that contains one of these directories or files: .git .hg .svn .bzr _darcs
-            " 'a' - the directory of the current file, unless it is a subdirectory of the cwd
+        let g:ctrlp_working_path_mode = '' " always use the cwd
         set wildmenu
         set wildmode=longest,list,full
-        " which files/dirs should be ignored in command-t
-        set wildignore+=.git,node_modules,htmlcov
-        set wildignore+=*.pyc,*min.css,*min.js,*.db
-        set wildignore+=*.jpg,*.JPG,*.png,*.PNG,*.gif,*.GIF,*.pdf,*.PDF
-        set wildignore+=*.psd,*.PSD,*.svg,*.SVG
+        " which files/dirs should be ignored in fuzzy opening
+        set wildignore+=.git,node_modules,htmlcov,env,venv,
+        set wildignore+=*.pyc,*min.css,*min.js,*.db,
+        set wildignore+=*.jpg,*.JPG,*.jpeg,*.JPEG,*.png,*.PNG,*.gif,*.GIF,*.pdf,*.PDF,
+        set wildignore+=*.psd,*.PSD,*.svg,*.SVG,
     Plug 'mhinz/vim-grepper'
+        let g:grepper = {}
+        let g:grepper.tools = ['git']
+        let g:grepper.git = {}
+        let g:grepper.git.grepprg = 'git grep --line-number --column'
         " ,g to enter the prompt, then jump to the first result
-        map <leader>g :Grepper -jump -tool git<cr>
+        map <leader>g :Grepper -jump<cr>
         " :Grepper -buffers " searches just the open files
         " ,n to go to next quickfix result
         " ,p to go to prior quickfix result
@@ -36,23 +37,35 @@ call plug#begin('~/.config/nvim/plugged')
         map <leader>n :cnext<cr>
         map <leader>p :cprevious<cr>
         map <leader>G :cclose<cr>
-    Plug 'joshdick/onedark.vim'
+    Plug 'itchyny/lightline.vim'
+        set noshowmode
+        let g:lightline = {
+            \ 'colorscheme': 'jellybeans',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
+            \ }
+            \ }
+    Plug 'rakr/vim-one'
+        let g:airline_theme='one'
         highlight SignColumn guibg=#1f1f1f
         highlight Todo guifg=red
         set nohlsearch
-        set guifont=DejaVu\ Sans\ Mono:h8
+        "set guifont=DejaVu\ Sans\ Mono:h10 " laptop screen
+        set guifont=DejaVu\ Sans\ Mono:h8 " big monitor
     Plug 'sheerun/vim-polyglot'
     Plug 'ervandew/supertab'
+    Plug 'gioele/vim-autoswap'
 call plug#end()
 
-colorscheme onedark " for whatever reason, this can't be inside the plug calls above
+colorscheme one " for whatever reason, this can't be inside the plug calls above
+set background=dark " light also installed with vim-one
 
 
-set tabstop=4
+set expandtab
 set shiftwidth=4
 set smarttab
-set expandtab
 set softtabstop=4
+set tabstop=4
 
 set shiftround
 set autoindent
@@ -69,10 +82,10 @@ let &showbreak = '+++ ' "string to put at the beginning of wrapped lines
 set vb "disable audible bell by enabling the (non-functional) visual bell
 set backspace=indent,eol,start " backspace from beginning of line will go to end of previous line
 
-set ignorecase
-set smartcase " smart case-sensitivity searching/replacing
+" set ignorecase
+" set smartcase " smart case-sensitivity searching/replacing
 
-" save a shift press
+" save a shift
 map ; :
 " be forgiving about :W, :Q, :Wq, :WQ, :Bd, :BD
 com! Q q
@@ -100,16 +113,20 @@ set guioptions-=r
 "autocmd BufWritePre * :%s/\s\+$//e
 
 " python files with non-"py" extensions
-au! BufRead,BufNewFile *.wsgi set filetype=python
-au! BufRead,BufNewFile *.tac set filetype=python
 au! BufRead,BufNewFile *.rpy set filetype=python
+au! BufRead,BufNewFile *.tac set filetype=python
+au! BufRead,BufNewFile *.wsgi set filetype=python
 " salt
 au! BufRead,BufNewFile *.sls set filetype=yaml
 au! BufRead,BufNewFile minion set filetype=yaml
 au! BufRead,BufNewFile roster set filetype=yaml
 " etc
-au! BufRead,BufNewFile Vagrantfile set filetype=ruby
-au! BufRead,BufNewFile Jenkinsfile set filetype=groovy
 au! BufRead,BufNewFile Dockerfile* set filetype=dockerfile
+au! BufRead,BufNewFile Jenkinsfile set filetype=groovy
+au! BufRead,BufNewFile Vagrantfile set filetype=ruby
 " shorter indentation
-au! BufRead,BufNewFile *.yaml setlocal shiftwidth=2
+au! BufRead,BufNewFile *.js setlocal shiftwidth=2 softtabstop=2 tabstop=2
+au! BufRead,BufNewFile *.json setlocal shiftwidth=2 softtabstop=2 tabstop=2
+au! BufRead,BufNewFile *.jsx setlocal shiftwidth=2 softtabstop=2 tabstop=2
+au! BufRead,BufNewFile *.yaml setlocal shiftwidth=2 softtabstop=2 tabstop=2
+au! BufRead,BufNewFile *.tf setlocal noexpandtab shiftwidth=2 softtabstop=2 tabstop=2
