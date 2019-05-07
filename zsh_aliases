@@ -1,0 +1,33 @@
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias which='which -a'                        # show all occurences of program
+alias grep='grep -E --color'                     # show differences in color
+
+if [[ $HOME =~ "Users" ]]; then
+    # mac
+    alias ls='ls -Gh'                 # colorize, human-readable
+    alias ll='ls -Gh -l'
+    alias la='ls -Gh -A'
+else
+    alias ls='ls --color -h'                 # colorize, human-readable
+    alias ll='ls -Gh -l'
+    alias la='ls -Gh -A'
+fi
+
+alias bc='bc -lq'
+alias echo='echo -e'
+alias less='less -R'
+
+alias du='du -hs'
+alias df='df -h'
+alias htop='nice sudo htop'
+alias top='nice nice top -ocpu'
+alias iotop='iotop -Po'
+
+alias rot13="tr a-zA-Z n-za-mN-ZA-M"
+
+if which xclip >/dev/null; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
