@@ -1,0 +1,28 @@
+{
+    "name": "Unicon Pale",
+    "comment": "Uniform contrast. Ported from github.com/andbar-ru/vim-unicon",
+    "use-theme-colors": false,
+    "background-color": "#111111",
+    "foreground-color": "#b9b9b9",
+    "palette": [
+
+"#262626",
+"#5b2d3b",
+"#214321",
+"#503528",
+"#303960",
+"#562b56",
+"#204141",
+"#b9b9b9",
+
+"#3b3b3b",
+"#efcbd6",
+"#bcddbc",
+"#e7d0c4",
+"#ccd3f0",
+"#ddcef3",
+"#badbdb",
+"#f1f1f1"
+
+    ]
+}

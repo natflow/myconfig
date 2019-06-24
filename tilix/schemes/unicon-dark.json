@@ -1,0 +1,25 @@
+{
+    "name": "Unicon Dark",
+    "comment": "Uniform contrast. Ported from github.com/andbar-ru/vim-unicon",
+    "use-theme-colors": false,
+    "background-color": "#111111",
+    "foreground-color": "#b9b9b9",
+    "palette": [
+      "#3b3b3b",
+      "#ad2b52",
+      "#1b6d1b",
+      "#944a25",
+      "#3352ce",
+      "#7635d6",
+      "#1a6969",
+      "#b9b9b9",
+      "#262626",
+      "#db6e8e",
+      "#51a251",
+      "#c28161",
+      "#748be8",
+      "#a878f0",
+      "#4e9d9d",
+      "#d4d4d4"
+    ]
+}
