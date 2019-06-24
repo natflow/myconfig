@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export LESS="--no-init --quit-if-one-screen"
+export LESS="--no-init --quit-if-one-screen --RAW-CONTROL-CHARS"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -31,9 +31,6 @@ HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -65,7 +62,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(docker gitfast)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,6 +88,7 @@ export EDITOR="nvim"
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 export AWS_DEFAULT_REGION="us-west-2"
+export AWS_REGION="${AWS_DEFAULT_REGION}"
 #export AWS_DEFAULT_PROFILE="default"
 
 

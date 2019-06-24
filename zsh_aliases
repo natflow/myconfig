@@ -9,15 +9,16 @@ if [[ $HOME =~ "Users" ]]; then
     alias ls='ls -Gh'                 # colorize, human-readable
     alias ll='ls -Gh -l'
     alias la='ls -Gh -A'
+    alias l1='ls -1' # single-column
 else
     alias ls='ls --color -h'                 # colorize, human-readable
     alias ll='ls -Gh -l'
     alias la='ls -Gh -A'
+    alias l1='ls -1' # single-column
 fi
 
 alias bc='bc -lq'
 alias echo='echo -e'
-alias less='less -R'
 
 alias du='du -hs'
 alias df='df -h'
