@@ -45,20 +45,20 @@ call plug#begin('~/.config/nvim/plugged')
             \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
             \ }
             \ }
-    Plug 'rakr/vim-one'
-        let g:airline_theme='one'
+    Plug 'andbar-ru/vim-unicon' " uniform contrast across colors, like solarized but higher contrast
+        "set guifont=DejaVu\ Sans\ Mono:h10 " laptop screen
+        set guifont=DejaVu\ Sans\ Mono:h9 " big monitor
+        set termguicolors " enable true colors in terminal
         highlight SignColumn guibg=#1f1f1f
         highlight Todo guifg=red
         set nohlsearch
-        "set guifont=DejaVu\ Sans\ Mono:h10 " laptop screen
-        set guifont=DejaVu\ Sans\ Mono:h8 " big monitor
     Plug 'sheerun/vim-polyglot'
     Plug 'ervandew/supertab'
     Plug 'gioele/vim-autoswap'
 call plug#end()
 
-colorscheme one " for whatever reason, this can't be inside the plug calls above
-set background=dark " light also installed with vim-one
+"" for whatever reason, this can't be inside the plug calls above
+colorscheme unicon
 
 
 set expandtab
@@ -82,8 +82,8 @@ let &showbreak = '+++ ' "string to put at the beginning of wrapped lines
 set vb "disable audible bell by enabling the (non-functional) visual bell
 set backspace=indent,eol,start " backspace from beginning of line will go to end of previous line
 
-" set ignorecase
-" set smartcase " smart case-sensitivity searching/replacing
+set ignorecase
+set smartcase " smart case-sensitivity searching/replacing
 
 " save a shift
 map ; :
@@ -101,6 +101,11 @@ com! BD bd
 " ex-mode is never wanted
 map Q q
 
+" paste into command-line
+cmap <c-v> <c-r>+
+" go to the beginning/end of the command-line, using common shell shortcut
+cmap <c-a> <c-b>
+
 " press spacebar to run the macro recorded in q
 nnoremap <Space> @q
 
@@ -116,6 +121,7 @@ set guioptions-=r
 au! BufRead,BufNewFile *.rpy set filetype=python
 au! BufRead,BufNewFile *.tac set filetype=python
 au! BufRead,BufNewFile *.wsgi set filetype=python
+
 " salt
 au! BufRead,BufNewFile *.sls set filetype=yaml
 au! BufRead,BufNewFile minion set filetype=yaml
