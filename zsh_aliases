@@ -33,4 +33,6 @@ if which xclip >/dev/null; then
     alias pbpaste='xclip -selection clipboard -o'
 fi
 
+alias rename="rename -v"
+
 alias vim='nvim' # old habits die hard

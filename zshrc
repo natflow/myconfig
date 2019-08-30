@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="~/bin:${PATH}"
 
 export LESS="--no-init --quit-if-one-screen --RAW-CONTROL-CHARS"
 
@@ -86,11 +87,6 @@ export EDITOR="nvim"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-export AWS_DEFAULT_REGION="us-west-2"
-export AWS_REGION="${AWS_DEFAULT_REGION}"
-#export AWS_DEFAULT_PROFILE="default"
-
 
 . ~/.zsh_aliases
 

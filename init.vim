@@ -11,6 +11,11 @@ syntax on
 let mapleader = ","
 
 call plug#begin('~/.config/nvim/plugged')
+    Plug 'andbar-ru/vim-unicon' " uniform contrast across colors, like solarized but higher contrast
+        set termguicolors " enable true colors in terminal
+        highlight SignColumn guibg=#1f1f1f
+        highlight Todo guifg=red
+        set nohlsearch
     Plug 'ctrlpvim/ctrlp.vim'
         map <leader>t :CtrlP<cr>
         map <leader>b :CtrlPBuffer<cr>
@@ -23,6 +28,17 @@ call plug#begin('~/.config/nvim/plugged')
         set wildignore+=*.pyc,*min.css,*min.js,*.db,
         set wildignore+=*.jpg,*.JPG,*.jpeg,*.JPEG,*.png,*.PNG,*.gif,*.GIF,*.pdf,*.PDF,
         set wildignore+=*.psd,*.PSD,*.svg,*.SVG,
+    Plug 'editorconfig/editorconfig-vim'
+    Plug 'ervandew/supertab'
+    Plug 'gioele/vim-autoswap'
+    Plug 'itchyny/lightline.vim'
+        set noshowmode
+        let g:lightline = {
+            \ 'colorscheme': 'jellybeans',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
+            \ }
+            \ }
     Plug 'mhinz/vim-grepper'
         let g:grepper = {}
         let g:grepper.tools = ['git']
@@ -37,24 +53,7 @@ call plug#begin('~/.config/nvim/plugged')
         map <leader>n :cnext<cr>
         map <leader>p :cprevious<cr>
         map <leader>G :cclose<cr>
-    Plug 'itchyny/lightline.vim'
-        set noshowmode
-        let g:lightline = {
-            \ 'colorscheme': 'jellybeans',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
-            \ }
-            \ }
-    Plug 'andbar-ru/vim-unicon' " uniform contrast across colors, like solarized but higher contrast
-        "set guifont=DejaVu\ Sans\ Mono:h10 " laptop screen
-        set guifont=DejaVu\ Sans\ Mono:h9 " big monitor
-        set termguicolors " enable true colors in terminal
-        highlight SignColumn guibg=#1f1f1f
-        highlight Todo guifg=red
-        set nohlsearch
     Plug 'sheerun/vim-polyglot'
-    Plug 'ervandew/supertab'
-    Plug 'gioele/vim-autoswap'
 call plug#end()
 
 "" for whatever reason, this can't be inside the plug calls above
@@ -121,7 +120,6 @@ set guioptions-=r
 au! BufRead,BufNewFile *.rpy set filetype=python
 au! BufRead,BufNewFile *.tac set filetype=python
 au! BufRead,BufNewFile *.wsgi set filetype=python
-
 " salt
 au! BufRead,BufNewFile *.sls set filetype=yaml
 au! BufRead,BufNewFile minion set filetype=yaml
