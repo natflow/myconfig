@@ -1,3 +1,5 @@
+" :source % to update running instances of vim
+
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -24,10 +26,11 @@ call plug#begin('~/.config/nvim/plugged')
         set wildmenu
         set wildmode=longest,list,full
         " which files/dirs should be ignored in fuzzy opening
-        set wildignore+=.git,node_modules,htmlcov,env,venv,
-        set wildignore+=*.pyc,*min.css,*min.js,*.db,
-        set wildignore+=*.jpg,*.JPG,*.jpeg,*.JPEG,*.png,*.PNG,*.gif,*.GIF,*.pdf,*.PDF,
-        set wildignore+=*.psd,*.PSD,*.svg,*.SVG,
+        set wildignore+=.git,node_modules,htmlcov,env,venv
+        set wildignore+=*.pyc,*min.css,*min.js,*.db
+        set wildignore+=*.jpg,*.JPG,*.jpeg,*.JPEG,*.png,*.PNG,*.gif,*.GIF,*.pdf,*.PDF
+        set wildignore+=*.psd,*.PSD,*.svg,*.SVG
+        set wildignore+=*/node_modules/*,*/build/*
     Plug 'editorconfig/editorconfig-vim'
     Plug 'ervandew/supertab'
     Plug 'gioele/vim-autoswap'
@@ -59,12 +62,28 @@ call plug#end()
 "" for whatever reason, this can't be inside the plug calls above
 colorscheme unicon
 
+" auto switch background to whatever the system is set to
+function! SetBackgroundMode(...)
+    let s:new_bg = "light"
+    let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
+    if s:mode ==? "dark"
+        let s:new_bg = "dark"
+    else
+        let s:new_bg = "light"
+    endif
+    if &background !=? s:new_bg
+        let &background = s:new_bg
+    endif
+endfunction
+call SetBackgroundMode()
+call timer_start(5000, "SetBackgroundMode", {"repeat": -1})
 
-set expandtab
-set shiftwidth=4
+
+"set expandtab
+"set shiftwidth=4
 set smarttab
-set softtabstop=4
-set tabstop=4
+"set softtabstop=4
+"set tabstop=4
 
 set shiftround
 set autoindent
@@ -128,9 +147,3 @@ au! BufRead,BufNewFile roster set filetype=yaml
 au! BufRead,BufNewFile Dockerfile* set filetype=dockerfile
 au! BufRead,BufNewFile Jenkinsfile set filetype=groovy
 au! BufRead,BufNewFile Vagrantfile set filetype=ruby
-" shorter indentation
-au! BufRead,BufNewFile *.js setlocal shiftwidth=2 softtabstop=2 tabstop=2
-au! BufRead,BufNewFile *.json setlocal shiftwidth=2 softtabstop=2 tabstop=2
-au! BufRead,BufNewFile *.jsx setlocal shiftwidth=2 softtabstop=2 tabstop=2
-au! BufRead,BufNewFile *.yaml setlocal shiftwidth=2 softtabstop=2 tabstop=2
-au! BufRead,BufNewFile *.tf setlocal noexpandtab shiftwidth=2 softtabstop=2 tabstop=2

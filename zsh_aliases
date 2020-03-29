@@ -20,6 +20,7 @@ fi
 alias bc='bc -lq'
 alias echo='echo -e'
 
+alias stat='stat -x'
 alias du='du -hs'
 alias df='df -h'
 alias htop='nice sudo htop'
@@ -27,6 +28,11 @@ alias top='nice nice top -ocpu'
 alias iotop='iotop -Po'
 
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
+
+# make it easier to get documentation of shell builtins
+unalias run-help
+autoload run-help
+alias help="run-help"
 
 if which xclip >/dev/null; then
     alias pbcopy='xclip -selection clipboard'

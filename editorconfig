@@ -1,0 +1,32 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.{tf,tfvars}]
+# indent style and size enforced by `terraform fmt`
+indent_style = space
+indent_size = 2
+
+[*.{rb,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.{css,js,jsx,json,html}]
+indent_style = space
+indent_size = 2
+
+[*.py*]
+indent_style = space
+indent_size = 4
+# isort config, black-compatible
+force_grid_wrap = 0
+include_trailing_comma = True
+line_length = 120
+multi_line_output = 3
+use_parentheses = True
