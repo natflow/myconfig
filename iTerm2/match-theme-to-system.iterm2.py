@@ -3,8 +3,8 @@
 import asyncio
 import iterm2
 
-LIGHT_THEME = "Tango Light"
-DARK_THEME = "Dark Contrast"
+LIGHT_THEME = "LuciusLightHighContrast"
+DARK_THEME = "Unicon"
 
 
 async def maybe_update_theme(connection, theme):
