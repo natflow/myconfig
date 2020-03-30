@@ -1,10 +1,16 @@
-[user]
-	name = Nat Flowers
-	email = 791900+natflow@users.noreply.github.com
-
-[branch]
-	autoSetupRebase = always
-
 [alias]
 	diff-word = diff --word-diff=color --word-diff-regex="[^[:space:],]+|[,]+"
 	show-word = show --word-diff=color --word-diff-regex="[^[:space:],]+|[,]+"
+[branch]
+	autoSetupRebase = always
+[core]
+	pager = less --RAW-CONTROL-CHARS --no-init --quit-if-one-screen
+[log]
+	follow = true
+[merge]
+	conflictstyle = diff3
+[push]
+	default = current
+[user]
+	name = Nat Flowers
+	email = 791900+natflow@users.noreply.github.com
