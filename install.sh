@@ -116,7 +116,7 @@ else
 fi
 
 AUTOLAUNCH_FILE="match-theme-to-system.iterm2.py"
-link_if_not_exists "$MYCONFIG/iTerm2/$AUTOLAUNCH_FILE" "$HOME/Library/Application Support/iTerm/Scripts/AutoLaunch/$AUTOLAUNCH_FILE"
+link_if_not_exists "$MYCONFIG/iTerm2/$AUTOLAUNCH_FILE" "$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch/$AUTOLAUNCH_FILE"
 
 
 ### Vim
