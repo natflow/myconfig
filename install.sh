@@ -75,6 +75,11 @@ else
 fi
 
 
+# Git
+
+link_if_not_exists $MYCONFIG/git/config $HOME/.gitconfig
+
+
 # Oh My Zsh
 
 # this file has to happen before install for idempotency since otherwise
@@ -91,7 +96,7 @@ else
 fi
 
 link_if_not_exists $MYCONFIG/zsh/zsh_aliases $HOME/.zsh_aliases
-link_if_not_exists $MYCONFIG/zsh/natflow.zsh-theme $HOME/.oh-my-zsh/plugins/natflow/natflow.zsh-theme
+link_if_not_exists $MYCONFIG/zsh/natflow.zsh-theme $HOME/.oh-my-zsh/themes/natflow.zsh-theme
 
 
 ## iTerm2
