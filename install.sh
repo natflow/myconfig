@@ -2,8 +2,9 @@
 
 set -eu
 
-DEVEL_DIR="$HOME/devel"
-MYCONFIG="$DEVEL_DIR/myconfig"
+cd
+
+MYCONFIG="devel/myconfig"
 CLONE_URL="git@github.com:natflow/myconfig.git"
 
 SUCCESS="✅"
@@ -24,15 +25,18 @@ success() {
 }
 
 link_if_not_exists() {
-    SRC="$1"
+    SRC="$MYCONFIG/$1"
     DST="$2"
     if [[ -f "$DST" ]]; then
         success $DST already exists.
     else
         action_needed_n $DST does not exist. Linking now$ELLIP
-        mkdir -p "$(dirname "$DST")"
-        rm -f "$DST" # fix for broken symlinks which return true with [[ -f
-        ln -s "$SRC" "$DST"
+        (
+            cd
+            mkdir -p "$(dirname "$DST")"
+            rm -f "$DST" # fix for broken symlinks which return true with [[ -f
+            ln -s "$SRC" "$DST"
+        )
         success
     fi
 }
@@ -62,29 +66,31 @@ else
 fi
 
 
-## Dotfiles
+## repo
 
 if [[ -d $MYCONFIG ]]; then
     success myconfig repo already exists
 else
     action_needed_n myconfig repo not found. Cloning now$ELLIP
     mkdir -p $DEVEL_DIR
-    cd $DEVEL_DIR
-    git clone $CLONE_URL > /dev/null
+    (
+        cd $DEVEL_DIR
+        git clone $CLONE_URL > /dev/null
+    )
     success
 fi
 
 
 # Git
 
-link_if_not_exists $MYCONFIG/git/config $HOME/.gitconfig
+link_if_not_exists git/config .gitconfig
 
 
 # Oh My Zsh
 
 # this file has to happen before install for idempotency since otherwise
 # the install script would create .zshrc and we wouldn't be able to reliably tell if it was freshly created or not.
-link_if_not_exists $MYCONFIG/zsh/zshrc $HOME/.zshrc
+link_if_not_exists zsh/zshrc .zshrc
 
 if [[ -d $HOME/.oh-my-zsh ]]; then
     success Oh My Zsh already installed.
@@ -95,8 +101,8 @@ else
     success Oh My Zsh successfully installed
 fi
 
-link_if_not_exists $MYCONFIG/zsh/zsh_aliases $HOME/.zsh_aliases
-link_if_not_exists $MYCONFIG/zsh/natflow.zsh-theme $HOME/.oh-my-zsh/themes/natflow.zsh-theme
+link_if_not_exists zsh/zsh_aliases .zsh_aliases
+link_if_not_exists zsh/natflow.zsh-theme .oh-my-zsh/themes/natflow.zsh-theme
 
 
 ## iTerm2
@@ -116,7 +122,7 @@ else
 fi
 
 AUTOLAUNCH_FILE="match-theme-to-system.iterm2.py"
-link_if_not_exists "$MYCONFIG/iTerm2/$AUTOLAUNCH_FILE" "$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch/$AUTOLAUNCH_FILE"
+link_if_not_exists "iTerm2/$AUTOLAUNCH_FILE" "Library/Application Support/iTerm2/Scripts/AutoLaunch/$AUTOLAUNCH_FILE"
 
 
 ### Vim
@@ -129,4 +135,5 @@ else
     wait_for_keypress
 fi
 
-link_if_not_exists $MYCONFIG/nvim/init.vim $HOME/.config/nvim/init.vim
+link_if_not_exists nvim/init.vim .config/nvim/init.vim
+link_if_not_exists nvim/editorconfig .editorconfig

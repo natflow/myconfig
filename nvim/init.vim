@@ -1,4 +1,4 @@
-" :source % to update running instances of vim
+" :source % to update current instance with any changes in this file
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -24,7 +24,10 @@ call plug#begin('~/.config/nvim/plugged')
         map <leader>f :CtrlPClearAllCaches<cr>
         let g:ctrlp_working_path_mode = '' " always use the cwd
         set wildmenu
-        set wildmode=longest,list,full
+        " when tab-completing commands
+        " * first tab shows a list (sorted by last used) if there are multiple matches, and completes to the longest substring
+        " * second tab shows a list (sorted by last used) if there are multiple matches, and completes to a full command
+        set wildmode=list:lastused:longest,list:lastused:full
         " which files/dirs should be ignored in fuzzy opening
         set wildignore+=.git,node_modules,htmlcov,env,venv
         set wildignore+=*.pyc,*min.css,*min.js,*.db
@@ -59,7 +62,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'sheerun/vim-polyglot'
 call plug#end()
 
-"" for whatever reason, this can't be inside the plug calls above
+" for whatever reason, this can't be inside the plug calls above
 colorscheme unicon
 
 " auto switch background to whatever the system is set to
@@ -79,43 +82,39 @@ call SetBackgroundMode()
 call timer_start(5000, "SetBackgroundMode", {"repeat": -1})
 
 
-"set expandtab
-"set shiftwidth=4
+" tabs, spaces, inserts, shifts... also see ~/.editorconfig
 set smarttab
-"set softtabstop=4
-"set tabstop=4
-
 set shiftround
 set autoindent
-
-set showmatch "briefly jumps to matching bracket/parentheses/brace
-set incsearch "searches while you type
-
-set ruler "always show line/column number
-set hidden "allow multiple buffers to be used
-set showcmd " show what you're doing
-set clipboard=unnamedplus " use OS clipboard as default yank/paste
-set linebreak "soft line wrap
-let &showbreak = '+++ ' "string to put at the beginning of wrapped lines
-set vb "disable audible bell by enabling the (non-functional) visual bell
 set backspace=indent,eol,start " backspace from beginning of line will go to end of previous line
 
+" search
+set showmatch " briefly jumps to matching bracket/parentheses/brace
+set incsearch " searches while you type
+
+set ruler " always show line/column number
+set hidden " allow multiple buffers to be used
+set showcmd " show what command you're starting as you're doing it
+set clipboard=unnamedplus " use OS clipboard as default yank/paste
+set linebreak " soft line wrap
+let &showbreak = '+++ ' " string to put at the beginning of wrapped lines
+set vb " disable audible bell by enabling the (non-functional) visual bell
+
+" case
 set ignorecase
 set smartcase " smart case-sensitivity searching/replacing
 
-" save a shift
-map ; :
 " be forgiving about :W, :Q, :Wq, :WQ, :Bd, :BD
-com! Q q
-com! W w
-com! Wq wq
-com! WQ wq
-com! Qa qa
-com! Wa wa
-com! Wqa wqa
-com! WQa wqa
-com! Bd bd
-com! BD bd
+command! Q q
+command! W w
+command! Wq wq
+command! WQ wq
+command! Qa qa
+command! Wa wa
+command! Wqa wqa
+command! WQa wqa
+command! Bd bd
+command! BD bd
 " ex-mode is never wanted
 map Q q
 
@@ -133,17 +132,11 @@ set guioptions-=l
 set guioptions-=r
 
 " remove trailing whitespace on save
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * if !&binary && &filetype != 'diff' | :%s/\s\+$//e | endif
 
-" python files with non-"py" extensions
-au! BufRead,BufNewFile *.rpy set filetype=python
-au! BufRead,BufNewFile *.tac set filetype=python
-au! BufRead,BufNewFile *.wsgi set filetype=python
-" salt
-au! BufRead,BufNewFile *.sls set filetype=yaml
-au! BufRead,BufNewFile minion set filetype=yaml
-au! BufRead,BufNewFile roster set filetype=yaml
-" etc
-au! BufRead,BufNewFile Dockerfile* set filetype=dockerfile
-au! BufRead,BufNewFile Jenkinsfile set filetype=groovy
-au! BufRead,BufNewFile Vagrantfile set filetype=ruby
+" set filetypes on otherwise unrecognized files
+autocmd! BufRead,BufNewFile *.rpy,*.tac,*.wsgi set filetype=python
+autocmd! BufRead,BufNewFile *.sls,minion,roster set filetype=yaml
+autocmd! BufRead,BufNewFile Dockerfile* set filetype=dockerfile
+autocmd! BufRead,BufNewFile Jenkinsfile set filetype=groovy
+autocmd! BufRead,BufNewFile Vagrantfile set filetype=ruby

@@ -1,32 +1,38 @@
 root = true
 
 [*]
-end_of_line = lf
-insert_final_newline = true
 charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+
+[*.{diff,patch}]
+trim_trailing_whitespace = false
+
+[*.{css,js,jsx,ts,tsx,json,html}]
+indent_style = space
+indent_size = 2
+
+[*.go]
+# indent style enforced by `go fmt`
+indent_style = tab
+indent_size = 4
+
+[*.py]
 indent_style = space
 indent_size = 4
-trim_trailing_whitespace = true
 
 [*.{tf,tfvars}]
 # indent style and size enforced by `terraform fmt`
 indent_style = space
 indent_size = 2
-
-[*.{rb,yml,yaml}]
-indent_style = space
-indent_size = 2
-
-[*.{css,js,jsx,json,html}]
-indent_style = space
-indent_size = 2
-
-[*.py*]
-indent_style = space
-indent_size = 4
-# isort config, black-compatible
-force_grid_wrap = 0
-include_trailing_comma = True
-line_length = 120
-multi_line_output = 3
-use_parentheses = True

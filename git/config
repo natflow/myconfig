@@ -5,10 +5,16 @@
 	autoSetupRebase = always
 [core]
 	pager = less --RAW-CONTROL-CHARS --no-init --quit-if-one-screen
+[diff]
+	colorMoved = dimmed-zebra
+[fetch]
+	prune = true
 [log]
 	follow = true
 [merge]
 	conflictstyle = diff3
+[pull]
+	rebase = true
 [push]
 	default = current
 [user]
