@@ -6,7 +6,7 @@
 [core]
 	pager = less --RAW-CONTROL-CHARS --no-init --quit-if-one-screen
 [diff]
-	colorMoved = dimmed-zebra
+	colorMoved = zebra
 [fetch]
 	prune = true
 [log]
@@ -17,6 +17,8 @@
 	rebase = true
 [push]
 	default = current
+[rebase]
+	autosquash = true
 [user]
 	name = Nat Flowers
 	email = 791900+natflow@users.noreply.github.com
