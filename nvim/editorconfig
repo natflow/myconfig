@@ -36,3 +36,8 @@ indent_size = 4
 # indent style and size enforced by `terraform fmt`
 indent_style = space
 indent_size = 2
+
+[.gitconfig]
+# match what `git config ...` does
+indent_style = tab
+indent_size = 4
