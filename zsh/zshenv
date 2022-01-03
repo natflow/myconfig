@@ -1,4 +1,4 @@
-export PATH="~/bin:/opt/homebrew/bin:${PATH}"
+export PATH="${HOME}/bin:/opt/homebrew/bin:${HOME}/go/bin:${PATH}"
 
 export LESS="--no-init --quit-if-one-screen --RAW-CONTROL-CHARS"
 
