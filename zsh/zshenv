@@ -24,3 +24,9 @@ export EDITOR="nvim"
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 [ -f ~/.homebrew-github-token ] && source ~/.homebrew-github-token
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+true
