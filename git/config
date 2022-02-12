@@ -9,6 +9,8 @@
 	pager = less --RAW-CONTROL-CHARS --no-init --quit-if-one-screen
 [fetch]
 	prune = true
+[init]
+	defaultBranch = main
 [log]
 	follow = true
 [merge]
