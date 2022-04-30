@@ -1,5 +1,13 @@
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$HOME/bin:/opt/homebrew/bin:$HOME/go/bin:$PATH"
+PATH_PARTS=(
+    $HOME/.rd/bin # rancher desktop: nerdctl, kubectl, etc
+    $HOME/.local/bin # poetry
+    $HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin # yarn
+    $HOME/go/bin # go
+    /opt/homebrew/bin:/opt/homebrew/sbin # homebrew
+    /usr/local/bin
+    "$PATH"
+)
+export PATH="${(j/:/)PATH_PARTS}"
 
 export LESS="--no-init --quit-if-one-screen --RAW-CONTROL-CHARS"
 

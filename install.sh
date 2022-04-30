@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/zsh
 
 set -eu
 
 cd
 
-MYCONFIG="devel/myconfig"
+MYCONFIG="$HOME/devel/myconfig"
 CLONE_URL="git@github.com:natflow/myconfig.git"
 
 SUCCESS="✅"
@@ -91,6 +91,7 @@ link_if_not_exists git/config .gitconfig
 # this file has to happen before install for idempotency since otherwise
 # the install script would create .zshrc and we wouldn't be able to reliably tell if it was freshly created or not.
 link_if_not_exists zsh/zshrc .zshrc
+link_if_not_exists zsh/zshenv .zshenv
 
 if [[ -d $HOME/.oh-my-zsh ]]; then
     success Oh My Zsh already installed.
@@ -115,6 +116,7 @@ else
     wait_for_keypress
     echo Manual steps:
     echo "* iTerm2 > Scripts > Manage > Install Python Runtime"
+    echo "* iTerm2 > Scripts > AutoLaunch > match-theme-to-system.iterm2.py"
     echo "* iTerm2 > iTerm2 > Preferences > Profiles > Colors > disable \"Brighten bold text\""
     echo "* iTerm2 > iTerm2 > Preferences > Profiles > Colors > enable \"Smart box cursor color\""
     echo "* iTerm2 > iTerm2 > Preferences > Profiles > Colors > Color Presets... > Import > $MYCONFIG/iterm2/LuciusLightHighContrast.itermcolors"
@@ -137,3 +139,12 @@ fi
 
 link_if_not_exists nvim/init.vim .config/nvim/init.vim
 link_if_not_exists nvim/editorconfig .editorconfig
+
+if [[ -s ~/notes ]]; then
+    success ~/notes already exists
+else
+    action_needed_n "~/notes does not exist. Linking now$ELLIP"
+    rm -f ~/notes
+    ln -s "$HOME/notes" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/notes"
+    success
+fi

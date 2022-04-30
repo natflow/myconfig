@@ -29,11 +29,11 @@ call plug#begin('~/.config/nvim/plugged')
         " * second tab shows a list (sorted by last used) if there are multiple matches, and completes to a full command
         set wildmode=list:lastused:longest,list:lastused:full
         " which files/dirs should be ignored in fuzzy opening
-        set wildignore+=.git,node_modules,htmlcov,env,venv
+        set wildignore+=.git,node_modules,env/**/*.py,venv/**/*.py
         set wildignore+=*.pyc,*min.css,*min.js,*.db
         set wildignore+=*.jpg,*.JPG,*.jpeg,*.JPEG,*.png,*.PNG,*.gif,*.GIF,*.pdf,*.PDF
         set wildignore+=*.psd,*.PSD,*.svg,*.SVG
-        set wildignore+=*/node_modules/*,*/build/*
+        set wildignore+=build,dist
     Plug 'editorconfig/editorconfig-vim'
     Plug 'ervandew/supertab'
     Plug 'gioele/vim-autoswap'
@@ -64,15 +64,14 @@ call plug#end()
 
 " for whatever reason, this can't be inside the plug calls above
 colorscheme unicon
+set background=dark
 
 " auto switch background to whatever the system is set to
 function! SetBackgroundMode(...)
     let s:new_bg = "light"
-    let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
-    if s:mode ==? "dark"
+    let s:mode = systemlist("defaults read -g AppleInterfaceStyle")
+    if v:shell_error == 0 && s:mode[0] == "Dark"
         let s:new_bg = "dark"
-    else
-        let s:new_bg = "light"
     endif
     if &background !=? s:new_bg
         let &background = s:new_bg
@@ -135,7 +134,7 @@ set guioptions-=r
 autocmd BufWritePre * if !&binary && &filetype != 'diff' | :%s/\s\+$//e | endif
 
 " set filetypes on otherwise unrecognized files
-autocmd! BufRead,BufNewFile *.rpy,*.tac,*.wsgi set filetype=python
+autocmd! BufRead,BufNewFile Tiltfile* set filetype=python
 autocmd! BufRead,BufNewFile *.sls,minion,roster set filetype=yaml
 autocmd! BufRead,BufNewFile Dockerfile* set filetype=dockerfile
 autocmd! BufRead,BufNewFile Jenkinsfile set filetype=groovy
