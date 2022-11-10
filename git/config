@@ -1,3 +1,5 @@
+[advice]
+	skippedCherryPicks = false
 [alias]
 	diff-word = diff --word-diff=color --word-diff-regex="[^[:space:],]+|[,]+"
 	show-word = show --word-diff=color --word-diff-regex="[^[:space:],]+|[,]+"
@@ -21,6 +23,10 @@
 	default = current
 [rebase]
 	autosquash = true
+[rerere]
+	enabled = true
 [user]
 	name = Nat Flowers
 	email = 791900+natflow@users.noreply.github.com
+[url "ssh://git@github.com/mariposa-health"]
+	insteadOf = https://github.com/mariposa-health

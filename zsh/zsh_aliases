@@ -2,7 +2,9 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias which='which -a'                        # show all occurences of program
+
 alias grep='grep -E --color'                     # show differences in color
+alias echo='echo -e'
 
 if [[ $HOME =~ "Users" ]]; then
     # mac
@@ -17,8 +19,6 @@ else
     alias l1='ls -1' # single-column
 fi
 
-alias bc='bc -lq'
-alias echo='echo -e'
 
 alias stat='stat -x'
 alias du='du -hs'

@@ -29,7 +29,7 @@ call plug#begin('~/.config/nvim/plugged')
         " * second tab shows a list (sorted by last used) if there are multiple matches, and completes to a full command
         set wildmode=list:lastused:longest,list:lastused:full
         " which files/dirs should be ignored in fuzzy opening
-        set wildignore+=.git,node_modules,env/**/*.py,venv/**/*.py
+        set wildignore+=.git,node_modules,env/**/*.py,venv/**/*.py,vendor
         set wildignore+=*.pyc,*min.css,*min.js,*.db
         set wildignore+=*.jpg,*.JPG,*.jpeg,*.JPEG,*.png,*.PNG,*.gif,*.GIF,*.pdf,*.PDF
         set wildignore+=*.psd,*.PSD,*.svg,*.SVG

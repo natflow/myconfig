@@ -64,3 +64,4 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh_aliases
 which kubectl &>/dev/null && source <(kubectl completion zsh)
 which tilt &>/dev/null && source <(tilt completion zsh)
+which flutter &>/dev/null && source <(flutter bash-completion)

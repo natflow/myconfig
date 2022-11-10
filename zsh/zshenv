@@ -1,6 +1,6 @@
 PATH_PARTS=(
     $HOME/.rd/bin # rancher desktop: nerdctl, kubectl, etc
-    $HOME/.local/bin # poetry
+    $HOME/Library/Python/3.9/bin # poetry
     $HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin # yarn
     $HOME/go/bin # go
     /opt/homebrew/bin:/opt/homebrew/sbin # homebrew
