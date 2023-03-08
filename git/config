@@ -18,6 +18,7 @@
 [merge]
 	conflictstyle = diff3
 [pull]
+	prune = true
 	rebase = true
 [push]
 	default = current

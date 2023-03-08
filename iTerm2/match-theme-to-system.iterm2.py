@@ -4,13 +4,13 @@ import asyncio
 import iterm2
 
 LIGHT_THEME = "LuciusLightHighContrast"
-DARK_THEME = "Unicon"
+#DARK_THEME = "Unicon"
+DARK_THEME = "Smoooooth"
 
 
 async def maybe_update_theme(connection, theme):
     # Themes have space-delimited attributes, one of which will be light or dark.
-    parts = theme.split(" ")
-    preset_name = LIGHT_THEME if "light" in parts else DARK_THEME
+    preset_name = LIGHT_THEME if "light" in theme.split(" ") else DARK_THEME
     preset = await iterm2.ColorPreset.async_get(connection, preset_name)
 
     # Update the list of all profiles and iterate over them.
